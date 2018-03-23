@@ -26,6 +26,13 @@ public class Practice03Scale extends RelativeLayout {
         super(context, attrs, defStyleAttr);
     }
 
+    public static final int ANIMATIONTYPE_SCALE_X_0 = 0x00;
+    public static final int ANIMATIONTYPE_SCALE_X_1 = 0x01;
+    public static final int ANIMATIONTYPE_SCALE_Y_0 = 0x02;
+    public static final int ANIMATIONTYPE_SCALE_Y_1 = 0x03;
+
+    private int animationType = ANIMATIONTYPE_SCALE_X_0;
+
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
@@ -37,6 +44,27 @@ public class Practice03Scale extends RelativeLayout {
             @Override
             public void onClick(final View v) {
                 // TODO 在这里处理点击事件，通过 View.animate().scaleX/Y() 来让 View 放缩
+                switch (animationType) {
+                    case ANIMATIONTYPE_SCALE_X_0:
+                        imageView.animate().scaleXBy(1.5f);
+                        break;
+                    case ANIMATIONTYPE_SCALE_X_1:
+                        imageView.animate().scaleXBy(-1.5f);
+                        break;
+                    case ANIMATIONTYPE_SCALE_Y_0:
+                        imageView.animate().scaleYBy(1.5f);
+                        break;
+                    case ANIMATIONTYPE_SCALE_Y_1:
+                        imageView.animate().scaleYBy(-1.5f);
+                        break;
+
+                }
+
+                animationType += 1;
+                if (animationType > ANIMATIONTYPE_SCALE_Y_1) {
+                    animationType = ANIMATIONTYPE_SCALE_X_0;
+                }
+
             }
         });
     }

@@ -34,6 +34,14 @@ public class Practice01Translation extends RelativeLayout {
         super(context, attrs, defStyleAttr);
     }
 
+
+    public static final int ANIMATION_TYPE_TO_RIGHT = 0x00;
+    public static final int ANIMATION_TYPE_TO_LEFT = 0x01;
+    public static final int ANIMATION_TYPE_TO_BOTTOM = 0x02;
+    public static final int ANIMATION_TYPE_TO_TOP = 0x03;
+
+    private int animationType = ANIMATION_TYPE_TO_RIGHT;
+
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
@@ -49,6 +57,28 @@ public class Practice01Translation extends RelativeLayout {
             @Override
             public void onClick(final View v) {
                 // TODO 在这里处理点击事件，通过 View.animate().translationX/Y/Z() 来让 View 平移
+
+                //translationX 都是在原来坐标的基础上进行的偏移
+                //例如原坐标 0.0 往右100 然后再-100 并不是回到了原位置 而是去到了-100的位置
+                //而translationXBy 就可以达到先100 后-100 之后回到原位置的效果
+                switch (animationType) {
+                    case ANIMATION_TYPE_TO_RIGHT:
+                        imageView.animate().translationXBy(100);
+                        break;
+                    case ANIMATION_TYPE_TO_LEFT:
+                        imageView.animate().translationXBy(-100);
+                        break;
+                    case ANIMATION_TYPE_TO_BOTTOM:
+                        imageView.animate().translationYBy(100);
+                        break;
+                    case ANIMATION_TYPE_TO_TOP:
+                        imageView.animate().translationYBy(-100);
+                        break;
+                }
+                animationType += 1;
+                if (animationType > ANIMATION_TYPE_TO_TOP) {
+                    animationType = ANIMATION_TYPE_TO_RIGHT;
+                }
             }
         });
     }

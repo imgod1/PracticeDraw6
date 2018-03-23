@@ -26,6 +26,11 @@ public class Practice04Alpha extends RelativeLayout {
         super(context, attrs, defStyleAttr);
     }
 
+
+    public static final int ANIMATIONTYPE_0 = 0x00;
+    public static final int ANIMATIONTYPE_1 = 0x01;
+    private int animationType = ANIMATIONTYPE_0;
+
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
@@ -33,10 +38,25 @@ public class Practice04Alpha extends RelativeLayout {
         animateBt = (Button) findViewById(R.id.animateBt);
         imageView = (ImageView) findViewById(R.id.imageView);
 
+
         animateBt.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(final View v) {
                 // TODO 在这里处理点击事件，通过 View.animate().alpha() 来改变 View 的透明度
+                switch (animationType) {
+                    case ANIMATIONTYPE_0:
+                        imageView.animate().alpha(0);
+                        break;
+                    case ANIMATIONTYPE_1:
+                        imageView.animate().alpha(1);
+                        break;
+
+                }
+                animationType += 1;
+                if (animationType > ANIMATIONTYPE_1) {
+                    animationType = ANIMATIONTYPE_0;
+                }
+
             }
         });
     }

@@ -32,6 +32,11 @@ public class Practice06Duration extends LinearLayout {
         super(context, attrs, defStyleAttr);
     }
 
+    public static final int ANIMATIONTYPE_0 = 0x00;
+    public static final int ANIMATIONTYPE_1 = 0x01;
+    private int animationType = ANIMATIONTYPE_0;
+
+
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
@@ -65,6 +70,14 @@ public class Practice06Duration extends LinearLayout {
             @Override
             public void onClick(View v) {
                 // TODO 在这里处理点击事件，执行动画。记得使用 `setDuration(duration)` 来设置动画的时长。
+                if (ANIMATIONTYPE_0 == animationType) {
+                    imageView.animate().translationXBy(200).setDuration(duration);
+                    animationType = ANIMATIONTYPE_1;
+                } else {
+                    imageView.animate().translationXBy(-200).setDuration(duration);
+                    animationType = ANIMATIONTYPE_0;
+                }
+
             }
         });
     }

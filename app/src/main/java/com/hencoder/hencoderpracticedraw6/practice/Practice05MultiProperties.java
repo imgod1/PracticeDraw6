@@ -26,6 +26,10 @@ public class Practice05MultiProperties extends ConstraintLayout {
         super(context, attrs, defStyleAttr);
     }
 
+    public static final int ANIMATIONTYPE_0 = 0x00;
+    public static final int ANIMATIONTYPE_1 = 0x01;
+    private int animationType = ANIMATIONTYPE_0;
+
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
@@ -35,10 +39,19 @@ public class Practice05MultiProperties extends ConstraintLayout {
         imageView.setScaleX(0);
         imageView.setScaleY(0);
         imageView.setAlpha(0f);
+        imageView.setRotation(0);
+        imageView.setTranslationX(0);
         animateBt.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 // TODO 在这里处理点击事件，同时对多个属性做动画
+                if (animationType == ANIMATIONTYPE_0) {
+                    imageView.animate().scaleX(1).scaleY(1).alpha(1).rotation(360).translationX(200);
+                    animationType = ANIMATIONTYPE_1;
+                } else {
+                    imageView.animate().scaleX(0).scaleY(0).alpha(0).rotation(0).translationX(0);
+                    animationType = ANIMATIONTYPE_0;
+                }
             }
         });
     }
